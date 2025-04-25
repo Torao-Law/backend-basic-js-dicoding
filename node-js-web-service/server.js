@@ -3,7 +3,6 @@ const http = require("http")
 const requestListener = (req, res) => {
   const { method, url } = req
   res.setHeader('Content-type', 'text/html')
-  res.statusCode = 200;
   
   // ========== LATIHAN METHOD ===============
   // if (method === "GET") {
@@ -24,15 +23,18 @@ const requestListener = (req, res) => {
   //   });
   // }
 
-  // ========== LATIHAN URL ===============
+  // ========== LATIHAN URL, STATUS RESPONSE, STATUS HEADER ===============
   if(url === "/") {
     if (method === "GET") {
+      res.statusCode = 200
       res.end('<h1>Ini adalah homepage</h1>');
     } else {
+      res.statusCode = 404
       res.end(`<h1>Halaman tidak dapat diakses dengan ${method} request</h1>`);
     }
   } else if (url === "/about") {
     if(method === 'GET') {
+      res.statusCode = 200
       res.end('<h1>Halo! Ini adalah halaman about</h1>')
     } else if(method === 'POST') {
       let body = []
@@ -44,12 +46,15 @@ const requestListener = (req, res) => {
       req.on("end", () => {
         body = Buffer.concat(body).toString()
         const { name } = JSON.parse(body)
+
+        res.statusCode = 201
         res.end(`Halo, ${name}`)
       })
     } else {
       res.end(`<h1>Halaman tidak dapat diakses menggunakan ${method} request</h1>`);
     }
   } else {
+    res.statusCode = 404
     res.end("<h1>Halaman tidak dapat ditemukan!")
   }
 }
