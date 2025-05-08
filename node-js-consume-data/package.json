@@ -1,0 +1,19 @@
+{
+  "name": "js-consume-data",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=3000 && node server.js",
+    "start:order": "PORT=4000 node ./src/OrderServices.js",
+    "start:user": "PORT=5000 node ./src/UserServices.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.4.0",
+    "got": "^11.8.6"
+  }
+}
